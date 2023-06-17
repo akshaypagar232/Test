@@ -35,7 +35,6 @@ public class CategoryController {
         return new ResponseEntity<CategoryDto>(categoryDto1, HttpStatus.CREATED);
     }
 
-
     @DeleteMapping("/category/{categoryId}")
     ResponseEntity<ApiResponse> deleteCategory(@PathVariable String categoryId) {
 
