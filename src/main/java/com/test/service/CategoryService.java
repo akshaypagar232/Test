@@ -7,12 +7,12 @@ public interface CategoryService {
 
     CategoryDto createCategory(CategoryDto categoryDto);
 
-    CategoryDto updateCategory(CategoryDto categoryDto, String categoryId);
+    CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId);
 
     PageableResponse<CategoryDto> getAllCategory(int page);
 
-    CategoryDto getCategoryById(String categoryId);
+    CategoryDto getCategoryById(Integer categoryId);
 
-    void deleteCategory(String categoryId);
+    void deleteCategory(Integer categoryId);
 
 }

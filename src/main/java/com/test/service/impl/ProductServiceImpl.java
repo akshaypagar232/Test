@@ -3,9 +3,11 @@ package com.test.service.impl;
 import com.test.constant.AppConstant;
 import com.test.dto.PageableResponse;
 import com.test.dto.ProductDto;
+import com.test.entity.Category;
 import com.test.entity.Product;
 import com.test.exception.ResourceNotFoundException;
 import com.test.helper.Helper;
+import com.test.repository.CategoryRepository;
 import com.test.repository.ProductRepository;
 import com.test.service.ProductService;
 
@@ -24,14 +26,17 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
     private ModelMapper mapper;
 
     @Override
-    public ProductDto createProduct(ProductDto productDto) {
+    public ProductDto createProduct(ProductDto productDto, Integer categoryId) {
 
-        String Id = UUID.randomUUID().toString();
-        productDto.setProductId(Id);
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND));
         Product product = mapper.map(productDto, Product.class);
+        product.setCategory(category);
         Product save = productRepository.save(product);
         ProductDto map = mapper.map(save, ProductDto.class);
 
@@ -39,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto updateProduct(ProductDto productDto, String productId) {
+    public ProductDto updateProduct(ProductDto productDto, Integer productId) {
 
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.PRODUCT_NOT_FOUND));
         Product map = mapper.map(productDto, Product.class);
@@ -64,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductDto getProductById(String productId) {
+    public ProductDto getProductById(Integer productId) {
 
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.PRODUCT_NOT_FOUND));
         ProductDto map = mapper.map(product, ProductDto.class);
@@ -73,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(String productId) {
+    public void deleteProduct(Integer productId) {
 
         Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.PRODUCT_NOT_FOUND));
         productRepository.delete(product);

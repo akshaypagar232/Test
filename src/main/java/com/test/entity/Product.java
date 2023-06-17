@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Product {
 
     @Id
-    private String productId;
+    private Integer productId;
     @Column(name = "product_title")
     private String title;
     @Column(name = "product_description")
@@ -25,7 +25,7 @@ public class Product {
     private long price;
     @Column(name = "product_quantity")
     private long quantity;
-    @ManyToOne()
+    @ManyToOne
     private Category category;
 
 }

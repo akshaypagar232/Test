@@ -13,11 +13,11 @@ public class Helper {
 
         List<U> all = page.getContent();
 
-        List<V> Dtos = all.stream().map(object -> new ModelMapper().map(object, type)).collect(Collectors.toList());
+        List<V> allDtos = all.stream().map(object -> new ModelMapper().map(object, type)).collect(Collectors.toList());
 
         PageableResponse<V> response = new PageableResponse<>();
 
-        response.setContent(Dtos);
+        response.setContent(allDtos);
         response.setPageNumber(page.getNumber());
         response.setPageSize(page.getSize());
         response.setTotalElements(page.getTotalElements());

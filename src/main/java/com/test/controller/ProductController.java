@@ -15,20 +15,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class ProductController {
 
-
     @Autowired
     private ProductService productService;
 
     @PostMapping("/product")
-    ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto) {
+    ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @RequestParam Integer categoryId) {
 
-        ProductDto product = productService.createProduct(productDto);
+        ProductDto product = productService.createProduct(productDto,categoryId);
 
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
     @PutMapping("/product/{productId}")
-    ResponseEntity<ProductDto> updateProductDto(@RequestBody ProductDto productDto, @PathVariable String productId) {
+    ResponseEntity<ProductDto> updateProductDto(@RequestBody ProductDto productDto, @PathVariable Integer productId) {
 
         ProductDto product = productService.updateProduct(productDto, productId);
 
@@ -44,7 +43,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/{productId}")
-    ResponseEntity<ProductDto> getProductById(@PathVariable String productId) {
+    ResponseEntity<ProductDto> getProductById(@PathVariable Integer productId) {
 
         ProductDto productById = productService.getProductById(productId);
 
@@ -52,7 +51,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{productId}")
-    ResponseEntity<ApiResponse> deleteProduct(@PathVariable String productId) {
+    ResponseEntity<ApiResponse> deleteProduct(@PathVariable Integer productId) {
 
         productService.deleteProduct(productId);
 

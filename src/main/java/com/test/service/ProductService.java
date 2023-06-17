@@ -5,14 +5,14 @@ import com.test.dto.ProductDto;
 
 public interface ProductService {
 
-    ProductDto createProduct(ProductDto productDto);
+    ProductDto createProduct(ProductDto productDto, Integer categoryId);
 
-    ProductDto updateProduct(ProductDto productDto, String productId);
+    ProductDto updateProduct(ProductDto productDto, Integer productId);
 
     PageableResponse<ProductDto> getAllProduct(int page);
 
-    ProductDto getProductById(String productId);
+    ProductDto getProductById(Integer productId);
 
-    void deleteProduct(String productId);
+    void deleteProduct(Integer productId);
 
 }

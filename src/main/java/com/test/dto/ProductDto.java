@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class ProductDto {
 
-    @NotEmpty
     private String productId;
     @NotEmpty
     private String title;
@@ -26,8 +25,6 @@ public class ProductDto {
     private long price;
     @NotEmpty
     private long quantity;
-    @NotEmpty
     private Category category;
-
 
 }

@@ -29,8 +29,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
 
-        String Id = UUID.randomUUID().toString();
-        categoryDto.setCategoryId(Id);
         Category category = mapper.map(categoryDto, Category.class);
         Category save = categoryRepository.save(category);
         CategoryDto map = mapper.map(save, CategoryDto.class);
@@ -39,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto updateCategory(CategoryDto categoryDto, String categoryId) {
+    public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
 
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND));
         Category category1 = mapper.map(categoryDto, Category.class);
@@ -62,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public CategoryDto getCategoryById(String categoryId) {
+    public CategoryDto getCategoryById(Integer categoryId) {
 
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND));
         CategoryDto map = mapper.map(category, CategoryDto.class);
@@ -71,7 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(String categoryId) {
+    public void deleteCategory(Integer categoryId) {
 
         Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException(AppConstant.CATEGORY_NOT_FOUND));
         categoryRepository.delete(category);
