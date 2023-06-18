@@ -16,7 +16,7 @@ import java.util.List;
 public class Category {
 
     @Id
-  //  @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer categoryId;
 
     @Column(name = "category_title")
@@ -25,7 +25,7 @@ public class Category {
     @Column(name = "category_description")
     private String description;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
 }

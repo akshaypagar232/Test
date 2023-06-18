@@ -23,7 +23,7 @@ public class ProductController {
 
         ProductDto product = productService.createProduct(productDto,categoryId);
 
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        return new ResponseEntity<ProductDto>(product, HttpStatus.CREATED);
     }
 
     @PutMapping("/product/{productId}")
@@ -31,7 +31,7 @@ public class ProductController {
 
         ProductDto product = productService.updateProduct(productDto, productId);
 
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        return new ResponseEntity<ProductDto>(product, HttpStatus.CREATED);
     }
 
     @GetMapping("/product")
@@ -47,7 +47,7 @@ public class ProductController {
 
         ProductDto productById = productService.getProductById(productId);
 
-        return new ResponseEntity<>(productById, HttpStatus.FOUND);
+        return new ResponseEntity<ProductDto>(productById, HttpStatus.FOUND);
     }
 
     @DeleteMapping("/product/{productId}")
@@ -63,5 +63,4 @@ public class ProductController {
 
         return new ResponseEntity<ApiResponse>(response, HttpStatus.OK);
     }
-
 }

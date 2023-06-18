@@ -16,6 +16,7 @@ import javax.persistence.*;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer productId;
     @Column(name = "product_title")
     private String title;

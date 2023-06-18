@@ -5,6 +5,7 @@ import com.test.dto.CategoryDto;
 import com.test.dto.PageableResponse;
 import com.test.exception.ApiResponse;
 import com.test.service.CategoryService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,15 +25,15 @@ public class CategoryController {
 
         CategoryDto category = categoryService.createCategory(categoryDto);
 
-        return new ResponseEntity<>(category, HttpStatus.CREATED);
+        return new ResponseEntity<CategoryDto>(category, HttpStatus.CREATED);
     }
 
     @PutMapping("/category/{categoryId}")
     ResponseEntity<CategoryDto> updateCategory(@Valid @RequestBody CategoryDto categoryDto, @PathVariable Integer categoryId) {
 
-        CategoryDto categoryDto1 = categoryService.updateCategory(categoryDto, categoryId);
+        CategoryDto category = categoryService.updateCategory(categoryDto, categoryId);
 
-        return new ResponseEntity<CategoryDto>(categoryDto1, HttpStatus.CREATED);
+        return new ResponseEntity<CategoryDto>(category, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/category/{categoryId}")
@@ -54,7 +55,7 @@ public class CategoryController {
 
         PageableResponse<CategoryDto> allCategory = categoryService.getAllCategory(page);
 
-        return new ResponseEntity<>(allCategory, HttpStatus.FOUND);
+        return new ResponseEntity<PageableResponse<CategoryDto>>(allCategory, HttpStatus.FOUND);
     }
 
     @GetMapping("/category/{categoryId}")
@@ -62,7 +63,7 @@ public class CategoryController {
 
         CategoryDto categoryById = categoryService.getCategoryById(categoryId);
 
-        return new ResponseEntity<>(categoryById, HttpStatus.FOUND);
+        return new ResponseEntity<CategoryDto>(categoryById, HttpStatus.FOUND);
     }
 
 }
